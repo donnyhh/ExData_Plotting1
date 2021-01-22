@@ -1,0 +1,10 @@
+library(dplyr)
+library(datasets)
+hpc <- read.table("household_power_consumption.txt",sep = ";",header=TRUE)
+hpc$Date <- as.Date(hpc$Date,"%d/%m/%Y")
+hpc2 <- filter(hpc,Date=="2007-02-01"| Date=="2007-02-02")
+hpc2$Global_active_power <- as.numeric(hpc2$Global_active_power)
+hist(hpc2$Global_active_power,col = "red",main = "Global Active Power", xlab = "Global Active Power (kilowatts)",
+      ylab = "Frequency")
+dev.copy(png, file="plot1.png",width = 480, height = 480)
+dev.off()
